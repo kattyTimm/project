@@ -1,0 +1,14 @@
+.content{
+  display: grid;
+  grid-template-areas:
+  "u m"; 
+  grid-template-columns: 3fr 9fr;
+}
+
+.user_list{
+  grid-area: u;
+}
+
+.message_list{
+  grid-area: m;
+}

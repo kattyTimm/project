@@ -1,0 +1,49 @@
+/*grid-area дает псевдоним элементу, это нужно чтобы сказать родителю как расположить элементы*/
+
+.contentInfo {
+  display: grid;
+
+  outline: 1px solid green;
+}
+
+.avaTemp{
+  grid-area: a;
+}
+
+.description{
+  grid-area: d;
+}
+
+@media screen and (min-width: 800px){
+
+  .contentInfo {
+    grid-template-areas: "a d"; 
+  }  
+
+  .ava{
+      height: 400px;
+      width: 300px;
+  }
+}
+
+
+@media screen and (max-width: 799px) and (min-width: 480px){
+ .contentInfo {
+    grid-template-areas: "a"
+                         "d"; 
+  }  
+ .ava{
+      height: 400px;
+      width: 300px;
+  }
+}
+
+@media screen and (max-width: 479px){
+ .contentInfo{
+    grid-template-areas: "a" "d";
+ }
+ .ava{
+     height: 250px;
+     width: 150px;
+  }
+}

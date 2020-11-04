@@ -2,9 +2,9 @@
  display: grid;
 
  grid-template-areas: 
- "h" /* это значит что хедер займет две колонки*/
+ "h" /* это значит что хедер займет одну колонки*/
  "n"
- "c" /* навбар и контент займут по одной колонке*/
+ "c" /* навбар и контент займут одну колонки*/
  ;
 
  grid-template-rows: 60px  60px 1fr; /*у меня 2 строки, одна 60px, вторая 1 фракция, то есть занимает все остальное*/
@@ -12,79 +12,11 @@
  /*template [templit] - шаблон, образец*/
 }
 
-
-/*grid-area дает псевдоним элементу, это нужно чтобы сказать родителю как расположить элементы*/
-.header {
- grid-area: h;
-
- background-color: silver;
-}
-
-.nav {
- grid-area: n;
-
- background-color: pink;
-}
-
-.content {
- grid-area: c;
-
- outline: 1px solid black;
- width: 1200px;
- margin: 30px auto;
-}
-
-.content img{
- 
-  height: 400px;
-  opacity: 0.7;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
-@media screen and (min-width: 1200px){
-  .content{
-     width: 1200px;
-  }
-  .content img{
-     width: 1200px;
-  }
-}
-
-@media screen and (max-width: 1199px) and (min-width: 800px){
- .content{
-     width: 800px;
-  }
-  .content img{
-     width: 800px;
-  }
-}
-
-
-@media screen and (max-width: 799px) and (min-width: 480px){
- .content{
-     width: 480px;
-     height: 200px;
-  }
-  .content img{
-     width: 480px;
-     height: 200px;
-  }
-}
-
-@media screen and (max-width: 479px){
-  .content{
-     width: 200px;
-     height: 100px;
-  }
-  .content img{
-     width: 200px;
-     height: 100px;
-  }
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

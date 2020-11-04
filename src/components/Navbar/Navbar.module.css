@@ -1,0 +1,15 @@
+/*grid-area дает псевдоним элементу, это нужно чтобы сказать родителю как расположить элементы*/
+
+.nav {
+ grid-area: n;
+
+ background-color: gold;
+}
+
+.activeLink{
+	color: green;
+}
+
+a{
+	text-decoration: none;
+}
