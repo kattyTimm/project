@@ -5,10 +5,12 @@
   grid-template-columns: 3fr 9fr;
 }
 
-.user_list{
-  grid-area: u;
+.ava{
+	width: 100px;
+	height: 100px;
 }
 
-.message_list{
-  grid-area: m;
+.selectedPage{
+	color: blue;
+	font-weight: bold;
 }

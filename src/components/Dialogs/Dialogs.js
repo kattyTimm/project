@@ -10,25 +10,25 @@ const Dialogs = (props) => {
   let refElem = React.createRef();
 
   let addMessage = () => {
-     props.dispatch(addMessageActionCreator());
+     props.addMessage();
   }
 
   let printNewMessageText = () => {
-     props.dispatch(newMessageTextActionCreator(refElem.current.value))
+     props.printNewMessageText(refElem.current.value);
   };
 
   return (
       <div className={s.content}>    
 
           <div className={s.dialogs}>
-             {props.state.dialogsData.map((obj, i) => <DialogItem key={i} name={obj.name}  id={obj.id} />)}             
+             {props.dialogsData.map((obj, i) => <DialogItem key={i} name={obj.name}  id={obj.id} />)}             
           </div>
 
           <div className={s.messages}>
-              {props.state.messagesDate.map((obj,i) => <MessageItem key={i}  message={obj.message} id={obj.id} />)}	                    
+              {props.messagesDate.map((obj,i) => <MessageItem key={i}  message={obj.message} id={obj.id} />)}	                    
           </div>
 
-          <textarea onChange={printNewMessageText} value={props.messageText} ref={refElem}/>  
+          <textarea onChange={printNewMessageText} value={props.newMessageText} ref={refElem}/>  
           <button onClick={addMessage}>add message</button>
 
       </div> 

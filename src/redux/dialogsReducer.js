@@ -3,7 +3,6 @@ const ADD_MESSAGE = 'ADD-MESSAGE';
 const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT';
 
 let initialState = {
-   dialogs: {
       dialogsData: [
         {name:"Dima", id:1},
         {name:"Lera", id:2},
@@ -17,7 +16,7 @@ let initialState = {
       ],
 
       newMessageText: ''
-    }
+    
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -25,13 +24,14 @@ const dialogsReducer = (state = initialState, action) => {
 switch(action.type){
   case ADD_MESSAGE:{
       let id = state.messagesDate.length + 1;
-      state.messagesDate.push({message: state.newMessageText, id:id});
-      state.newMessageText = '';
-      return state;
+      return {...state, 
+                      messagesDate: [...state.messagesDate, {message: state.newMessageText, id:id}],
+                      newMessageText: ''};
+
   }
   case NEW_MESSAGE_TEXT:{
-      state.newMessageText = action.value;
-      return state;
+      return {...state, newMessageText: action.value}     
+
   }
   default :return state;
   }

@@ -12,6 +12,12 @@
  /*template [templit] - шаблон, образец*/
 }
 
+.header {
+ grid-area: h;
+
+ background-color: silver;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
