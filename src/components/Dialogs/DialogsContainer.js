@@ -1,13 +1,16 @@
 import React from 'react';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 import {addMessageActionCreator, newMessageTextActionCreator} from './../../redux/dialogsReducer';
+
+import {AuthRedirectComponent} from '../../hoc/AuthRedirectComponent';
 
  let mapStateToProps = (state) => {
    return {
        dialogsData: state.dialogs.dialogsData,
        newMessageText: state.dialogs.newMessageText,
-       messagesDate: state.dialogs.messagesDate
+       messagesDate: state.dialogs.messagesDate,
    } 
  };
 
@@ -18,26 +21,15 @@ import {addMessageActionCreator, newMessageTextActionCreator} from './../../redu
   }
  };
 
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
-/*
-const DialogsContainer = (props) => {
-  let dialogsData = props.state.dialogsData;
-  let newMessageText = props.state.newMessageText;
-  let messagesDate = props.state.messagesDate;
+//let DialogsComponentWithRedirect = AuthRedirectComponent(Dialogs);
 
-  let addMessage = () => {
-     props.dispatch(addMessageActionCreator());
-  }
+//const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(DialogsComponentWithRedirect);
 
-  let printNewMessageText = (val) => {
-     props.dispatch(newMessageTextActionCreator(val));
-  };
+// compose сама вызовет AuthRedirectComponent и connect для Dialogs, и оборнет ее в контейнерные компоненты
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+   AuthRedirectComponent
+  )(Dialogs);
 
-  return (
-      <Dialogs addMessage={addMessage} printNewMessageText={printNewMessageText} 
-               dialogsData={dialogsData} newMessageText={newMessageText} messagesDate={messagesDate}/> 
 
-  );
-}
-*/
-export default DialogsContainer;
+

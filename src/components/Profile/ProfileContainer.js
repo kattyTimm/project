@@ -1,11 +1,15 @@
 import React from 'react';
 import * as axios from 'axios';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
+import {compose} from 'redux';
 
 import s from './Profile.module.css';
 import Profile from './Profile';
-import {setUserPropfileAC} from '../../redux/profileReducer';
+import {getProfileThunk} from '../../redux/profileReducer';
+
+import {profileApi} from '../../redux/api';
+import {AuthRedirectComponent} from '../../hoc/AuthRedirectComponent';
 
 class ProfileContainer extends React.Component{
   constructor(props){
@@ -18,63 +22,32 @@ class ProfileContainer extends React.Component{
 
        if(!userId) userId = 6858;
 
-      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(resp => {     
-       console.log(this.props.match.params);  
-        this.props.setUserPropfile(resp.data);
-      });
+       this.props.setUserPropfile(userId);
     }
 
     render(){
+     if(!this.props.isAuth) return <Redirect to='/login' />
+
       return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
 
 const mapStateToProps = (state) => {
    return {
-      profile: state.profile.profile
+      profile: state.profile.profile,
    } 
 };
 
-ProfileContainer = withRouter(ProfileContainer);
+//let ProfileComponentWithRedirect = AuthRedirectComponent(ProfileContainer);
 
-ProfileContainer = connect(mapStateToProps, {setUserPropfile : setUserPropfileAC})(ProfileContainer);
+//let ContainerProfileComponentWithRedirect = withRouter(ProfileComponentWithRedirect);
 
-export default ProfileContainer;
-/*
-class ProfileContainer extends React.Component{
-  
-  componentDidMount(){
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/6858`).then( resp => {
-      console.log(resp);
-      this.props.setUserPropfile(resp.data);
-    });
-   
-  }
+//ProfileContainer = connect(mapStateToProps, {setUserPropfile : getProfileThunk})(ContainerProfileComponentWithRedirect);
 
-  render(){
-    return (
-      <div>    
-        <Profile {...this.props} profile={this.props.profile}/>        
-      </div> 
-     );
-  }
-} 
-
-const mapStateToProps = (state) => {
-    return {
-        profile: state.profile.profile,
-    }
-};
-
-ProfileContainer = connect(mapStateToProps, {setUserPropfile})(ProfileContainer);
+ProfileContainer = compose(
+    connect(mapStateToProps, {setUserPropfile : getProfileThunk}),
+    withRouter,
+    AuthRedirectComponent
+  )(ProfileContainer);
 
 export default ProfileContainer;
-
-*/
-/*
-const mapDispatchToProps = (dispatch) => {
-    return {
-          setUserPropfile: (userId) => dispatch(setUserPropfileAC(userId))
-    }
-};
-*/

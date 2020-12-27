@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import LoginPage from './components/Login/Login';
 
 const App = (props) => {
 
@@ -20,7 +21,8 @@ const App = (props) => {
           <Route path='/dialogs' render={ () => <DialogsContainer /> } />  {/*component={Dialogs}*/}
            {/*state={props.state.profile} dispatch={props.dispatch}*/}
           <Route path='/profile/:userId?' render={ () => <ProfileContainer /> } />   
-          <Route path='/users' render={ () => <UsersContainer /> } />      
+          <Route path='/users' render={ () => <UsersContainer /> } />   
+          <Route path='/login' render={ () => <LoginPage /> } />  
       </div> 
 
   );

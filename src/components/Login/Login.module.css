@@ -1,0 +1,16 @@
+.content{
+  display: grid;
+  grid-template-areas:
+  "u m"; 
+  grid-template-columns: 3fr 9fr;
+}
+
+.ava{
+	width: 100px;
+	height: 100px;
+}
+
+.selectedPage{
+	color: blue;
+	font-weight: bold;
+}

@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {compose} from 'redux';
 
 
 import UsersApiContainer from './UsersApiContainer';
@@ -18,13 +17,9 @@ const mapStateToProps = (state) => {
 };
 
 
-// const UsersContainer = connect(mapStateToProps, {
-  //follow, unFollow, setCurrentPage, togglefollowingProgress, 
-  //getUsers: getUsersThunkCreator, unFollow: unFollowThunk, follow: followThunk} )(UsersApiContainer);
-
-  const UsersContainer = compose(connect(mapStateToProps, {
+ const UsersContainer = connect(mapStateToProps, {
   follow, unFollow, setCurrentPage, togglefollowingProgress, 
-  getUsers: getUsersThunkCreator, unFollow: unFollowThunk, follow: followThunk} ))(UsersApiContainer);
+  getUsers: getUsersThunkCreator, unFollow: unFollowThunk, follow: followThunk} )(UsersApiContainer);
 
 export default UsersContainer;
  

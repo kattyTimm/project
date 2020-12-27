@@ -1,6 +1,7 @@
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT';
+const SET_AUTH = 'SET_AUTH';
 
 let initialState = {
       dialogsData: [
@@ -15,8 +16,7 @@ let initialState = {
         {message: "from mama", id:3},
       ],
 
-      newMessageText: ''
-    
+      newMessageText: '',   
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -30,10 +30,11 @@ switch(action.type){
 
   }
   case NEW_MESSAGE_TEXT:{
-      return {...state, newMessageText: action.value}     
+      return {...state, newMessageText: action.value};     
 
   }
-  default :return state;
+
+  default : return state;
   }
 }
 

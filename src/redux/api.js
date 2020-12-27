@@ -29,3 +29,13 @@ export const usersApi = {
     }
 
 };
+
+
+export const authApi = {
+	auth: () => {return instance.get(`auth/me`).then(resp => resp.data); }
+};
+
+
+export const profileApi = {
+   getProfile: (id) => {return instance.get(`profile/${id}`).then(resp => resp.data); }
+};

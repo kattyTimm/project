@@ -4,33 +4,19 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 import Header from './Header';
-import PreloaderTop from '../common/PreloaderTop/PreloaderTop';
-import {setAuthUserDataAC, smallImgUrlAC, setTopStatusAC} from './../../redux/authReducer';
+import {setUserDataThunk} from './../../redux/authReducer';
+import {authApi, profileApi} from './../../redux/api';
 import s from './Header.module.css';
 
 class HeaderContainer extends React.Component{
 
   componentDidMount(){
-     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}).then(resp => {
-     	
-     	if(resp.data.resultCode === 0){
-     		let {id, email, login} = resp.data.data;
-           this.props.setAuthUserData(id, email, login);
-     	
-
-     	  axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`).then(resp => {
-
-     	  	   let smallImgUrl = resp.data.photos.small;
-               this.props.setSmallImgUrl(smallImgUrl);
-               this.props.setTopStatus(resp.data.aboutMe);
-     	  });
-        }
-     });
+    this.props.setAuthUserData();
   }
-
+  
   render(){
   	return <>
-  	           {this.props.isFetching ? <PreloaderTop className={s.right}/> : null}   
+  	          
   	           <Header  {...this.props} />
   	       </>
   }
@@ -48,10 +34,7 @@ const mapStateToProps = (state) => ({
 
 HeaderContainer = withRouter(HeaderContainer);
 
-HeaderContainer = connect(mapStateToProps, {
-	                    setAuthUserData: setAuthUserDataAC, 
-	                    setSmallImgUrl: smallImgUrlAC,
-	                    setTopStatus: setTopStatusAC})(HeaderContainer);
+HeaderContainer = connect(mapStateToProps, {setAuthUserData: setUserDataThunk})(HeaderContainer);
 
 export default HeaderContainer;
 

@@ -1,3 +1,5 @@
+import {authApi, profileApi} from './api';
+
 const SET_USER_DATA = 'SET-USER-DATA';
 const SET_IMG_URL_ACTIVE_USER = 'SET-IMG-URL-ACTIVE-USER';
 const SET_TOP_STATUS = 'SET-TOP-STATUS';
@@ -31,9 +33,30 @@ const authReducer = (state = initialState, action) => {
 };
 
 
-export const setAuthUserDataAC = (id, email, login) => ( {type: SET_USER_DATA, data: {id, email, login} } );
-export const smallImgUrlAC = (url) => ({type: SET_IMG_URL_ACTIVE_USER, url});
-export const setTopStatusAC = (value) => ({type: SET_TOP_STATUS, status: value});
+ const setAuthUserDataAC = (id, email, login) => ( {type: SET_USER_DATA, data: {id, email, login} } );
+ const smallImgUrlAC = (url) => ({type: SET_IMG_URL_ACTIVE_USER, url});
+ const setTopStatusAC = (value) => ({type: SET_TOP_STATUS, status: value});
+
+export const setUserDataThunk = () => {
+  return dispatch => {
+      authApi.auth().then(data => {
+      
+      if(data.resultCode === 0){
+        let {id, email, login} = data.data;
+           dispatch(setAuthUserDataAC(id, email, login));
+      
+
+          profileApi.getProfile(`${id}`).then(data => {
+                  console.log(data)
+                 let smallImgUrl = data.photos.small;
+                 dispatch(smallImgUrlAC(smallImgUrl));
+                 dispatch(setTopStatusAC(data.aboutMe));
+          }); 
+        }
+     });
+  }
+}
+
 
 export default authReducer;
 

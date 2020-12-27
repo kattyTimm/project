@@ -1,4 +1,6 @@
 //let rerenderEntireTree = () => {}; // entire - whole
+import {profileApi} from './api';
+
 const ADD_POST = 'ADD-POST';
 const NEW_POST_TEXT = 'NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -35,6 +37,15 @@ const profileReducer = (state = initialState, action) => {
 
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const addNewPostTextActionCreator = (val) => ({type: NEW_POST_TEXT, value: val});
-export const setUserPropfileAC = (profile) => ({type: SET_USER_PROFILE, profile: profile});
+const setUserPropfileAC = (profile) => ({type: SET_USER_PROFILE, profile: profile});
+
+export const getProfileThunk = (userId) => {
+  return dispatch => {
+      profileApi.getProfile(userId).then(data => {     
+        console.log(userId);  
+        dispatch(setUserPropfileAC(data));
+      });
+  }
+}
 
 export default profileReducer;
