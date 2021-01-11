@@ -2,10 +2,11 @@ import React from 'react';
 
 import s from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
-  console.log(props.profile);
-
+ 
+ 
    if(!props.profile){ 
      return <Preloader />
    }
@@ -19,6 +20,8 @@ const ProfileInfo = (props) => {
         <div className={s.description}>
 
            <img src={props.profile.photos.large}/>
+
+           <ProfileStatus profile={props.profile}/>
 
            <div>
                <span className={s.describeItem}>name: </span>

@@ -42,7 +42,7 @@ const setUserPropfileAC = (profile) => ({type: SET_USER_PROFILE, profile: profil
 export const getProfileThunk = (userId) => {
   return dispatch => {
       profileApi.getProfile(userId).then(data => {     
-        console.log(userId);  
+        
         dispatch(setUserPropfileAC(data));
       });
   }
